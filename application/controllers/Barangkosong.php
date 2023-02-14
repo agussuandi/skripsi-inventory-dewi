@@ -51,4 +51,15 @@ class Barangkosong extends CI_Controller
             }
         }
     }
+
+    public function delete($getId)
+    {
+        $id = encode_php_tags($getId);
+        if ($this->admin->delete('barang_kosong', 'id', $id)) {
+            set_pesan('data berhasil dihapus.');
+        } else {
+            set_pesan('data gagal dihapus.', false);
+        }
+        redirect('barang_kosong');
+    }
 }
