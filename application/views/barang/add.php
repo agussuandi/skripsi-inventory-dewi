@@ -40,21 +40,21 @@
                 <div class="row form-group">
                     <label class="col-md-3 text-md-right" for="stok">Stok</label>
                     <div class="col-md-9">
-                        <input value="<?= set_value('stok'); ?>" name="stok" id="stok" type="text" class="form-control" placeholder="Jumlah...">
+                        <input value="<?= set_value('stok'); ?>" name="stok" id="stok" type="text" class="form-control" placeholder="Jumlah..." oninput="numberOnly(event)" />
                         <?= form_error('stok', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-md-3 text-md-right" for="harga_beli">Harga beli</label>
                     <div class="col-md-9">
-                        <input value="<?= set_value('harga_beli'); ?>" name="harga_beli" id="harga_beli" type="text" class="form-control" placeholder="Rupiah.">
+                        <input value="<?= set_value('harga_beli'); ?>" name="harga_beli" id="harga_beli" type="text" class="form-control" placeholder="Rupiah." oninput="numberOnly(event)" />
                         <?= form_error('harga_beli', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="col-md-3 text-md-right" for="harga_jual">Harga Jual</label>
                     <div class="col-md-9">
-                        <input value="<?= set_value('harga_jual'); ?>" name="harga_jual" id="harga_jual" type="text" class="form-control" placeholder="Rupiah.">
+                        <input value="<?= set_value('harga_jual'); ?>" name="harga_jual" id="harga_jual" type="text" class="form-control" placeholder="Rupiah." oninput="numberOnly(event)" />
                         <?= form_error('harga_jual', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>

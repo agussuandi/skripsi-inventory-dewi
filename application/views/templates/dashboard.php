@@ -380,6 +380,10 @@
             let totalStok = parseInt(stok.val()) - parseInt(this.value);
             total.val(Number(totalStok));
         });
+
+		numberOnly = e => {
+			e.target.value = e.target.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1')
+		}
     </script>
 
     <?php if ($this->uri->segment(1) == 'dashboard') : ?>
