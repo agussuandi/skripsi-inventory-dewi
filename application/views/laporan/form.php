@@ -33,12 +33,12 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="dari">Dari</label>
-                                <input type="text" readonly name="dari" id="dari" value="<?= set_value('dari') ?? $dari; ?>" class="form-control" />
+                                <input type="text" readonly name="dari" id="dari" value="<?= set_value('dari') ?? $dari; ?>" class="form-control" onchange="handleDate()" />
                                 <?= form_error('dari', '<small class="text-danger">', '</small>'); ?>
                             </div>
                             <div class="col-lg-6">
                                 <label for="sampai">Sampai</label>
-                                <input type="text" readonly name="sampai" id="sampai" value="<?= set_value('sampai') ?? $sampai; ?>" class="form-control" />
+                                <input type="text" readonly name="sampai" id="sampai" value="<?= set_value('sampai') ?? $sampai; ?>" class="form-control" onchange="handleDate()" />
                                 <?= form_error('sampai', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
@@ -64,7 +64,21 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', event => {
-        $('#dari').datepicker({uiLibrary: 'bootstrap4'});
-        $('#sampai').datepicker({uiLibrary: 'bootstrap4'});
+        $('#dari').datepicker({uiLibrary: 'bootstrap4'})
+        $('#sampai').datepicker({uiLibrary: 'bootstrap4'})
     })
+
+    handleDate = () => {
+        const dateFrom = $('#dari').val()
+        const dateTo = $('#sampai').val()
+
+        const fDateFrom = dateFrom.replace(/\//g, '')
+        const fDateTo = dateTo.replace(/\//g, '')
+
+        if(fDateFrom.length > 0 && fDateTo.length > 0 && fDateFrom > fDateTo)
+        {
+            $('#sampai').val('')
+            alert('Start Date tidak bisa lebih kecil dari End Date.')
+        }
+    }
 </script>
