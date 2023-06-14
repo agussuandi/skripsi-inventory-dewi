@@ -29,14 +29,19 @@
                 </div>
                 <div class="row form-group">
                     <label class="col-lg-3 text-lg-right" for="tanggal">Tanggal</label>
-                    <div class="col-lg-5">
-                        <div class="input-group">
-                            <input value="<?= set_value('tanggal'); ?>" name="tanggal" id="tanggal" type="text" class="form-control" placeholder="Periode Tanggal">
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fa fa-fw fa-calendar"></i></span>
+                    <div class="col-lg-9">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="dari">Dari</label>
+                                <input type="text" readonly name="dari" id="dari" value="<?= set_value('dari') ?? $dari; ?>" class="form-control" />
+                                <?= form_error('dari', '<small class="text-danger">', '</small>'); ?>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="sampai">Sampai</label>
+                                <input type="text" readonly name="sampai" id="sampai" value="<?= set_value('sampai') ?? $sampai; ?>" class="form-control" />
+                                <?= form_error('sampai', '<small class="text-danger">', '</small>'); ?>
                             </div>
                         </div>
-                        <?= form_error('tanggal', '<small class="text-danger">', '</small>'); ?>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -56,3 +61,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', event => {
+        $('#dari').datepicker({uiLibrary: 'bootstrap4'});
+        $('#sampai').datepicker({uiLibrary: 'bootstrap4'});
+    })
+</script>

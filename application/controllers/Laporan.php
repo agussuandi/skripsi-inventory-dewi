@@ -15,26 +15,31 @@ class Laporan extends CI_Controller
     public function index()
     {
         $this->form_validation->set_rules('transaksi', 'Transaksi', 'required|in_list[barang_masuk,barang_keluar,keuntungan]');
-        $this->form_validation->set_rules('tanggal', 'Periode Tanggal', 'required');
+        $this->form_validation->set_rules('dari', 'Periode Tanggal Dari', 'required');
+        $this->form_validation->set_rules('sampai', 'Periode Tanggal Sampai', 'required');
 
         if ($this->form_validation->run() == false) {
             $data['title'] = "Laporan Transaksi";
+            $data['dari'] = date('Y-m-d');
+            $data['sampai'] = date('Y-m-d');
             $this->template->load('templates/dashboard', 'laporan/form', $data);
         } else {
             $input = $this->input->post(null, true);
             $table = $input['transaksi'];
-            $tanggal = $input['tanggal'];
-            $pecah = explode(' - ', $tanggal);
-            $mulai = date('Y-m-d', strtotime($pecah[0]));
-            $akhir = date('Y-m-d', strtotime(end($pecah)));
+
+            $dari = date('Y-m-d', strtotime($input['dari']));
+            $sampai = date('Y-m-d', strtotime($input['sampai']));
+
+            $tanggal = $input['dari'].' - '.$input['sampai'];
 
             $query = '';
             if ($table === 'barang_masuk') {
-                $query = $this->admin->getBarangMasuk(null, null, ['mulai' => $mulai, 'akhir' => $akhir]);
+                $query = $this->admin->getBarangMasuk(null, null, ['mulai' => $dari, 'akhir' => $sampai]);
+                var_dump($query); die();
             } else if ($table === 'barang_keluar') {
-                $query = $this->admin->getBarangKeluar(null, null, ['mulai' => $mulai, 'akhir' => $akhir]);
+                $query = $this->admin->getBarangKeluar(null, null, ['mulai' => $dari, 'akhir' => $sampai]);
             } else {
-                $query = $this->admin->getKeuntungan(null, null, ['mulai' => $mulai, 'akhir' => $akhir]);
+                $query = $this->admin->getKeuntungan(null, null, ['mulai' => $dari, 'akhir' => $sampai]);
             }
 
             $this->_cetak($query, $table, $tanggal);
