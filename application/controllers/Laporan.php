@@ -35,7 +35,6 @@ class Laporan extends CI_Controller
             $query = '';
             if ($table === 'barang_masuk') {
                 $query = $this->admin->getBarangMasuk(null, null, ['mulai' => $dari, 'akhir' => $sampai]);
-                var_dump($query); die();
             } else if ($table === 'barang_keluar') {
                 $query = $this->admin->getBarangKeluar(null, null, ['mulai' => $dari, 'akhir' => $sampai]);
             } else {
